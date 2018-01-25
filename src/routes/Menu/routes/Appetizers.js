@@ -4,9 +4,13 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import MenuItem from '../../../components/MenuItem';
 
 export default class Appetizers extends React.Component {
-  static navigationOptions = {
+  static navigationOptions = () => ({
     title: 'Appetizers',
-  }
+    headerTitle: 'Afukpetizers',
+    //headerStyle: {backgroundColor: '#979797', flex: -1},
+    headerTitleStyle: {alignSelf: 'center', textAlign: 'right', color: 'gold'}
+    //headerRight: <View></View>
+  })
 
   render() {
     return (

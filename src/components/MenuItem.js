@@ -18,7 +18,7 @@ export default ({
     <Text style={styles.title}>{title}</Text>
     <Text style={styles.description}>{description}</Text>
     <Text style={styles.price}>{price}</Text>
-  </View> 
+  </View>
 )
 
 const styles = StyleSheet.create({

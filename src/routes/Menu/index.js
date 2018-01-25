@@ -11,6 +11,7 @@ const routeConfig = {
 }
 
 const StackNavigatorConfig = {
+  headerMode: 'none',
   navigationOptions: {
     headerBackTitleStyle: {
       color: 'red',

@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     width: 50
   },
   text: {
-    fontFamily: 'AlegreyaSansSC-Medium',
+    fontFamily: 'AlegreyaSansSC-Regular',
     fontSize: 18,
     color: 'rgb(240, 212, 98)',
   }

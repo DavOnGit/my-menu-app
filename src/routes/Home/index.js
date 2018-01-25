@@ -1,5 +1,6 @@
-import React from 'react';
-import { Linking, Text, Image, View, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
+import React from 'react'
+import { Linking, Text, Image, View, StyleSheet, Dimensions, SafeAreaView } from 'react-native'
+import { Tile } from 'react-native-elements'
 
 import NavLinks from '../../components/NavLinks'
 
@@ -8,11 +9,17 @@ const { width } = Dimensions.get('window');
 const Home = ({ navigation: { navigate } }) => {//console.log('HOME PROPS:\n', props)
   return (
   <View style={[styles.container, styles.bgColor]}>
-    <View style={styles.container}>
-      <Image
-        resizeMode='cover'
-        style={styles.image}
-        source={require('../../../assets/images/guacamole.jpg')}
+    <View style={[styles.container]}>
+      <Tile
+        imageSrc={require('../../../assets/images/beerfull.jpg')}
+        title={'Attenti al\nLuppolo'}
+        titleStyle={styles.title}
+        captionStyle={styles.caption}
+        caption={'beers and eatings'}
+        featured
+        activeOpacity={1}
+        //resizeMode='cover'
+        //style={styles.image}
       />
     </View>
     <NavLinks navigate={navigate} />
@@ -43,12 +50,15 @@ const styles = StyleSheet.create({
     //borderColor: '#d44'
   },
   title: {
-    fontFamily: 'AlegreyaSansSC-Light',
-    fontSize: 30,
-  },
-  subTitle: {
     fontFamily: 'AlegreyaSansSC-Regular',
-    fontSize: 16,
+    fontSize: 40,
+    fontWeight: 'normal',
+    color: '#272727'
+  },
+  caption: {
+    fontFamily: 'AlegreyaSansSC-Medium',
+    fontSize: 20,
+    color: '#272727'
   },
   number: {
     color: '#fe0000',
