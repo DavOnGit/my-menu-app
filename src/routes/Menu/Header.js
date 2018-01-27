@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   logo: {
     width: width / 3,
     marginBottom: 6,
-    maxHeight: 50
+    maxHeight: 50,
+    alignSelf: 'center'
   }
 })

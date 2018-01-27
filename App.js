@@ -41,29 +41,22 @@ export default class App extends React.Component {
   };
 
   render() {
-    if (!this.state.assetsLoaded) {
-      return (
-        <SafeAreaView style={styles.safeArea}>
-          <AppLoading
-            startAsync={this._loadAssetsAsync}
-            onFinish={() => this.setState({ assetsLoaded: true })}
-            onError={console.warn} />
-        </SafeAreaView>
-      )
-    }
+    const loadingView = (
+      <AppLoading
+        startAsync={this._loadAssetsAsync}
+        onFinish={() => this.setState({ assetsLoaded: true })}
+        onError={console.warn} />
+    )
 
     return (
       <SafeAreaView style={styles.safeArea}>
-        <View style={styles.container}>
-          <StatusBar
-            barStyle = "dark-content"
-            hidden = {true}
-            translucent = {true}
-            backgroundColor = "rgba(240, 212, 98, 1)"
-            animated
-          />
-          <Root />
-        </View>
+        {!this.state.assetsLoaded ?
+          loadingView : (
+          <View style={styles.container}>
+            <StatusBar />
+            <Root />
+          </View>
+        )}
       </SafeAreaView>
     );
   }
@@ -79,10 +72,5 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     // NOTE: for ios add this: react-native-status-bar-size
     //marginTop: (Platform.OS == 'ios') ? 20 : StatusBar.currentHeight
-  },
-  info: {
-    fontFamily: 'AlegreyaSansSC-Regular',
-    textAlign: 'center',
-    fontSize: 14,
   },
 });

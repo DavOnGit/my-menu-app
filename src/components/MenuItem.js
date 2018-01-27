@@ -11,7 +11,7 @@ export default ({
 }) => (
   <View>
     <Image
-      resizeMode='contain'
+      resizeMode='cover'
       source={source}
       style={styles.image}
     />

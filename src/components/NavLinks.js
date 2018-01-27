@@ -10,7 +10,7 @@ export default class NavLinks extends React.Component {
       <View style={styles.mainContainer}>
         <View style={styles.row}>
           <TouchableOpacity
-            onPress={() => { this.props.navigate('Menu') }}
+            onPress={() => { this.props.navigate('Beer') }}
             style={styles.linkContainer}
           >
             <Icon

@@ -4,13 +4,13 @@ import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import MenuItem from '../../../components/MenuItem';
 
 export default class Appetizers extends React.Component {
-  static navigationOptions = () => ({
+  static navigationOptions = {
     title: 'Appetizers',
-    headerTitle: 'Afukpetizers',
+    //headerTitle: 'Afukpetizers',
     //headerStyle: {backgroundColor: '#979797', flex: -1},
-    headerTitleStyle: {alignSelf: 'center', textAlign: 'right', color: 'gold'}
-    //headerRight: <View></View>
-  })
+    //headerTitleStyle: { textAlign: 'center', alignSelf: 'center', color: 'gold' },
+    //headerRight: <View />
+  }
 
   render() {
     return (
@@ -36,6 +36,6 @@ export default class Appetizers extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   }
 })

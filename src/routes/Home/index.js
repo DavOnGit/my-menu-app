@@ -15,7 +15,7 @@ const Home = ({ navigation: { navigate } }) => {//console.log('HOME PROPS:\n', p
         title={'Attenti al\nLuppolo'}
         titleStyle={styles.title}
         captionStyle={styles.caption}
-        caption={'beers and eatings'}
+        caption={'beer & eatings'}
         featured
         activeOpacity={1}
         //resizeMode='cover'
