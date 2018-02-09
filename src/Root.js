@@ -5,9 +5,9 @@ import { StackNavigator, Header } from 'react-navigation';
 
 import Home from './routes/Home'
 import Beer from './routes/Beer'
-import Menu from './routes/Menu'
+import MenuNavigator from './routes/Menu'
 import Contact from './routes/Contact'
-import Address from './routes/Address/index'
+import Address from './routes/Address'
 
 const ImageHeader = props => (
   <View style={{ backgroundColor: '#272727' }}>
@@ -21,23 +21,20 @@ const ImageHeader = props => (
 
 const StackConfig = {
   Home: {
-    screen: Home,
-    navigationOptions: {}
+    screen: Home
   },
   Beer: {
     screen: Beer
   },
   Menu: {
-    screen: Menu,
-    navigationOptions: {}
+    screen: MenuNavigator
   },
   Contact: {
-    screen: Contact,
-    navigationOptions: {}
+    screen: Contact
   },
   Address: {
     screen: Address,
-  }
+  },
 }
 
 const styles = {
@@ -59,7 +56,9 @@ const StackStyleConfig = {
     headerTitleStyle: styles.title,
     header: (props) => <ImageHeader {...props} />,
     headerRight: <View />
-  }
+  },
+  cardStyle: { opacity: 1 },
+  initialRouteName: 'Home'
 }
 
 export default StackNavigator(StackConfig, StackStyleConfig);

@@ -2,29 +2,28 @@ import React from 'react'
 import { ScrollView, Text, StyleSheet } from 'react-native'
 import { Card } from 'react-native-elements'
 
-export default class Burgers extends React.Component {
+export default class Fries extends React.Component {
   static navigationOptions = {
-    title: 'Burgers'
+    title: 'Fries'
   }
 
   render() {console.log(this.props)
     return (
       <ScrollView style={styles.container}>
         {
-          this.props.screenProps && this.props.screenProps.map((burger, idx) => (
+          this.props.screenProps && this.props.screenProps.map((item, idx) => (
             <Card
-              title={burger.name}
-              titleStyle={{fontFamily: 'AlegreyaSansSC-Light', color: 'gold', fontWeight: 'normal', fontSize: 24, marginBottom: 5}}
-              //fontFamily={'AlegreyaSansSC-Medium'}
+              title={item}
+              titleStyle={{fontFamily: 'AlegreyaSansSC-Light', color: 'gold', fontWeight: 'normal', fontSize: 24, marginBottom: 0}}
               containerStyle={{backgroundColor: '#635255', borderRadius: 15, borderColor: '#635255'}}
               dividerStyle={{display: 'none'}}
               key={idx}>
-              <Text style={{ color: '#FFFFFF', textAlign: 'center', fontFamily: 'AlegreyaSansSC-Regular', fontSize: 14}}>
-                {burger.ingr}
-              </Text>
             </Card>
           ))
         }
+        <Text style={{ color: '#D0CCD0', marginVertical: 20, textAlign: 'center' }}>
+          * prodotto surgelato all'origine.
+        </Text>
       </ScrollView>
     )
   }

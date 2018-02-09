@@ -1,23 +1,30 @@
-import Menu from './routes/Menu';
-import Appetizers from './routes/Appetizers';
-import Burgers from './routes/Burgers';
+import React from 'react'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 
-import { StackNavigator } from 'react-navigation';
+import MenuNavigator from './MenuNavigator'
+import { firebaseRef } from '../../firebase'
 
-const routeConfig = {
-  Menu: { screen: Menu },
-  Appetizers: { screen: Appetizers },
-  Burgers: { screen: Burgers },
-}
+class MenuNavigatorWrapper extends React.Component {
+  static router = MenuNavigator.router
 
-const StackNavigatorConfig = {
-  headerMode: 'none',
-  navigationOptions: {
-    headerBackTitleStyle: {
-      color: 'red',
-    },
-    headerTintColor: 'red'
+  state = {}
+
+  componentDidMount() {
+    firebaseRef.child('menu').once('value')
+      .then(data => { console.log(data.val()); this.setState({data: data.val()}) })
+  }
+
+  render() {console.log('NUUUU', this.props, this.state)
+    const navState  = this.props.navigation.state
+    console.log('navState: ', navState)
+    const routeName = navState.routes[navState.index].routeName
+    console.log('dum: ', routeName)
+    const selectedData = routeName === 'menu' ? null : this.state.data[routeName]
+    console.log('Slice: ', selectedData)
+    return(
+      <MenuNavigator screenProps={selectedData} navigation={this.props.navigation}/>
+    )
   }
 }
 
-export default StackNavigator(routeConfig, StackNavigatorConfig);
+export default MenuNavigatorWrapper

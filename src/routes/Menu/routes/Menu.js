@@ -1,32 +1,55 @@
-import React from 'react';
+import React from 'react'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
+import { ListItem, Button } from 'react-native-elements'
 
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import { ListItem } from 'react-native-elements'; // 0.19.0
+// import Header from '../Header'
 
-import Header from '../Header';
-
-import "@expo/vector-icons"; // 6.2.2
+import "@expo/vector-icons"
 
 export default class Menu extends React.Component {
-  static navigationOptions = {
-    ...Header
-  }
+  //static navigationOptions = { title: 'Salsiccias' }
 
   render() {
-    const { navigation: { navigate } } = this.props;
+    const { navigation: { navigate } } = this.props
+    console.log(this.props)
     return (
-      <ScrollView>
-        <View style={styles.container}>
+      <ScrollView style={styles.scroll}>
+        <View style={styles.view}>
           <ListItem
-            underlayColor='transparent'
-            title='Appetizers'
-            onPress={() => navigate('Appetizers')}
-          />
-          <ListItem
-            underlayColor='transparent'
+            underlayColor='#489'
             title='Burgers'
-            onPress={() => navigate('Burgers')}
+            onPress={() => navigate('hamburger')}
+            titleStyle={styles.title}
           />
+          <ListItem
+            underlayColor='transparent'
+            title='Salsiccias'
+            onPress={() => navigate('salsiccia')}
+            titleStyle={styles.title}
+          />
+          <ListItem
+            underlayColor='transparent'
+            title='Wurstels'
+            onPress={() => navigate('wurstel')}
+            titleStyle={styles.title}
+          />
+          <ListItem
+            underlayColor='transparent'
+            title='Baguettes'
+            onPress={() => navigate('baguette')}
+            titleStyle={styles.title}
+          />
+          <ListItem
+            underlayColor='transparent'
+            title='Fries'
+            onPress={() => navigate('fried')}
+            titleStyle={styles.title}
+          />
+          {/* <Button
+            title='Fries'
+            color='#605856'
+            onPress={() => navigate('fried')}
+          /> */}
         </View>
       </ScrollView>
     )
@@ -34,7 +57,18 @@ export default class Menu extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  scroll: {
+    //flex: 1,
+    backgroundColor: '#272727'
+  },
+  view: {
+    //flex: 1,
+    backgroundColor: '#605856'
+  },
+  title: {
+    color: '#FFD700',
+    fontSize: 24,
+    fontFamily: 'AlegreyaSansSC-Light',
+    textAlign: 'center',
   }
 })

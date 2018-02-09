@@ -6,7 +6,6 @@ import { Button } from 'react-native-elements'
 import mapStyle from  './mapStyle'
 
 const { width, height } = Dimensions.get('window')
-const GOOGLE_MAPS_ID = 'ChIJuelXfmJQRxMRlytHItLDbG4'
 
 export default class Address extends React.Component {
   render() {
@@ -27,7 +26,7 @@ export default class Address extends React.Component {
             <MapView.Marker
               coordinate={{latitude: 40.21081, longitude: 16.676378}}
               title='Attenti al Luppolo'
-              description='test description'
+              description='via Giustino Fortunato 69, Policoro (Mt)'
               pinColor='gold'
             />
           </MapView>

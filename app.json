@@ -5,14 +5,14 @@
     "slug": "menu-app-r1WD9snNM",
     "privacy": "unlisted",
     "sdkVersion": "23.0.0",
-    "version": "0.0.1",
+    "version": "0.1.1",
     "orientation": "default",
     "primaryColor": "#209020",
     "icon": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc",
     "splash": {
-      "image": "./assets/images/canelup.jpg",
-      "tabletImage": "./assets/images/canelup.jpg",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/images/splashwolf.png",
+      "tabletImage": "./assets/images/splashwolf.png",
+      "backgroundColor": "#272727"
     },
     "packagerOpts": {
       "assetExts": [
@@ -23,7 +23,7 @@
       ]
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false
     }
   }
 }

@@ -1,7 +1,10 @@
 import React from 'react'
-import { Text, Image, View, ScrollView, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
+import { Text, Image, View, ScrollView, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native'
 import { List, ListItem, FormLabel, FormInput, Button } from 'react-native-elements'
+import Spinner from 'react-native-loading-spinner-overlay'
 import { WebBrowser } from 'expo'
+
+import firebase from '../../firebase'
 
 class TapList extends React.Component {
   static navigationOptions = {
@@ -9,30 +12,47 @@ class TapList extends React.Component {
   }
 
   state = {
-    loading: true
+    tapList: []
+  }
+
+  async componentWillMount() {
+    const tapList = await firebase.database().ref().child('ontap/').once('value')
+    //const tapListString = await AsyncStorage.getItem('ontap')
+    //const tapList = JSON.parse(tapListString)
+    //console.log(tapList)
+    this.setState({ tapList: tapList.val() })
   }
 
   render() {
-    return (
-      <ScrollView style={{/*borderWidth: 1, borderColor: '#44dd44'*/}}
-        contentContainerStyle={{flex: 1, minHeight: 480, backgroundColor: '#272727'}}
+    const { tapList } = this.state; console.log(!tapList.length)
+    return (!tapList.length ?
+      <View style={{flex: 1, backgroundColor: '#272727'}}>
+        <Spinner
+          visible={true}
+          color={'#489'}
+          textContent={"Loading..."}
+          textStyle={{color: '#FFF'}}
+          //overlayColor={'#272727'}
+        />
+      </View> :
+      <ScrollView
+        contentContainerStyle={styles.scroll}
       >
-        <List containerStyle={{flex: 1, marginTop: 0, borderTopWidth: 0, borderBottomWidth: 0, borderBottomColor: '#cbd2d9'}}>
+        <List containerStyle={styles.list}>
           {
             tapList.map((beer, idx) => (
               <ListItem
                 title={beer.name}
                 subtitle={`by ${beer.brewer}`}
                 rightTitle={`${beer.style}\nalc: ${beer.alc}°`}
-                //fontFamily='AlegreyaSansSC-Medium'
-                containerStyle={{flex: -1, justifyContent: 'center', height: 150, minHeight: 80, backgroundColor: '#272727', borderBottomWidth: 0}}
-                wrapperStyle={{}}
-                titleStyle={{color: 'gold', fontFamily: 'AlegreyaSansSC-Medium', fontSize: 20}}
-                rightTitleContainerStyle={{alignItems: 'center', /*borderWidth: 1, borderColor: '#d44'*/}}
-                rightTitleStyle={{textAlign: 'center'}}
+                containerStyle={styles.container}
+                titleStyle={styles.title}
+                rightTitleContainerStyle={styles.rightContainer}
+                rightTitleStyle={styles.rightTitle}
                 rightTitleNumberOfLines={2}
                 rightIcon={
-                  <TouchableOpacity style={{backgroundColor: '#489', borderRadius: 50, opacity: beer.ratebeer ? 1 : 0.3}}
+                  <TouchableOpacity
+                    style={{backgroundColor: '#489', borderRadius: 50, opacity: beer.ratebeer ? 1 : 0.3}}
                     disabled={!beer.ratebeer}
                     onPress={ () => { WebBrowser.openBrowserAsync(beer.ratebeer) } }
                   >
@@ -55,17 +75,47 @@ class TapList extends React.Component {
 
 export default TapList
 
+const styles = StyleSheet.create({
+  scroll: {
+    flex: 1,
+    minHeight: 480,
+    backgroundColor: '#272727'
+  },
+  list: {
+    flex: 1,
+    marginTop: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
+    borderBottomColor: '#cbd2d9'
+  },
+  container: {
+    flex: -1,
+    justifyContent: 'center',
+    height: 150,
+    minHeight: 80,
+    backgroundColor: '#272727',
+    borderBottomWidth: 0
+  },
+  title:{
+    color: 'gold',
+    fontFamily: 'AlegreyaSansSC-Medium',
+    fontSize: 20
+  },
+  rightContainer: { alignItems: 'center' },
+  rightTitle: { textAlign: 'center' },
+})
+
 const tapList = [
   {
     brewer: 'Port Brewing/Lost Abbey',
     name: 'High Tide',
     style: 'seasonal IPA',
     alc: 6.5,
-    ratebeer: 'https://www.ratebeer.com/beer/port-brewing-high-tide-fresh-hop-ipa/39965/'
+    ratebeer: 'https://www.ratebeer.com/beer/port-brewing-high-tide-fresh-hop-ipa/39965/#container'
   },
   {
     brewer: 'Dupont',
-    name: 'Saison Biologique',
+    name: 'Saison Bio',
     style: 'Saison',
     alc: 5.5,
     ratebeer: 'https://www.rtjhn7y6hjhf'

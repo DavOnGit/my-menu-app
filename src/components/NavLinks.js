@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
-
+import { View, TouchableOpacity, Text, Image, StyleSheet, Linking, Platform } from 'react-native';
 import { Icon } from 'react-native-elements'
+import { WebBrowser } from 'expo'
+import AppLink from 'react-native-app-link'
 
 export default class NavLinks extends React.Component {
 
-  render() {console.log('NavLink props', this.props)
+  render() {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.row}>
@@ -31,28 +32,46 @@ export default class NavLinks extends React.Component {
               size={48}
               iconStyle={styles.icon}
             /> */}
-            <Image
-              source={require('../../assets/images/foodicon.png')}
-              style={styles.imageIcon}
-            />
+            <Image source={require('../../assets/images/foodicon.png')} style={styles.imageIcon} />
             <Text style={styles.text}>Food</Text>
           </TouchableOpacity>
-          <View style={styles.linkContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              Linking.canOpenURL('fb://').then(res => {
+                if (res) {
+                  const slash = Platform.OS === 'ios' ? '?id=' : '/'
+                  Linking.openURL(`fb://page${slash}620746404610579/events_list`)
+                } else {
+                  WebBrowser.openBrowserAsync('https://m.facebook.com/birrotecaattentialluppolo/events')
+                }
+              })
+            }}
+            style={styles.linkContainer}
+          >
             {/* <Icon
               type='ionicon'
               name='ios-list-box-outline'
               size={48}
               iconStyle={styles.icon}
             /> */}
-            <Image
-              source={require('../../assets/images/bookingicon.png')}
-              style={styles.imageIcon}
-            />
-            <Text style={styles.text}>Booking</Text>
-          </View>
+            <Image source={require('../../assets/images/bookingicon.png')} style={styles.imageIcon} />
+            <Text style={styles.text}>Events</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.row}>
-          <View style={styles.linkContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              Linking.canOpenURL('fb://').then(res => {
+                if (res) {
+                  const slash = Platform.OS === 'ios' ? '?id=' : '/'
+                  Linking.openURL(`fb://page${slash}620746404610579/admin_stories`)
+                } else {
+                  WebBrowser.openBrowserAsync('https://m.facebook.com/birrotecaattentialluppolo/events')
+                }
+              })
+            }}
+            style={styles.linkContainer}
+          >
             {/* <Icon
               type='ionicon'
               name='ios-megaphone-outline'
@@ -64,8 +83,11 @@ export default class NavLinks extends React.Component {
               style={styles.imageIcon}
             />
             <Text style={styles.text}>News</Text>
-          </View>
-          <View style={styles.linkContainer}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => { this.props.navigate('Contact') }}
+            style={styles.linkContainer}
+          >
             <Icon
               type='ionicon'
               name='ios-chatbubbles-outline'
@@ -73,7 +95,7 @@ export default class NavLinks extends React.Component {
               iconStyle={styles.icon}
             />
             <Text style={styles.text}>Feedback</Text>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => { this.props.navigate('Address') }}
             style={styles.linkContainer}
@@ -99,33 +121,53 @@ export default class NavLinks extends React.Component {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    //borderWidth: 3,
-    //borderColor: 'yellow'
+    flexDirection: 'column',
+    backgroundColor: '#272727',
+    //flexWrap: 'nowrap',
+    //justifyContent: 'flex-start',
+    //minHeight: 200,
+    //borderWidth: 1,
+    //borderColor: 'yellow',
+    marginTop: 0,
+    marginHorizontal: 0,
+    //padding: 20
   },
   row: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    //borderWidth: 2,
-    //borderColor: 'orange'
+    //alignContent: 'space-around',
+    //width: 360,
+    //minWidth: 260,
+    // borderWidth: 1,
+    // borderColor: 'orange',
+    //marginVertical: 10
   },
   linkContainer: {
-    flex: -1,
+    //flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    //alignSelf: 'center',
     width: 82,
-    //borderWidth: 1,
-    //borderColor: '#444'
+    height: 82,
+    backgroundColor: '#000',
+    borderRadius: 5,
+    //margin: 10,
+    marginBottom: 0,
+    // borderWidth: 1,
+    // borderColor: '#444'
   },
   icon: {
     color: 'rgb(240, 212, 98)',
-    fontSize: 50,
+    //fontSize: 48,
     paddingBottom: 5
   },
   imageIcon: {
-    height: 50,
-    width: 50
+    height: 48,
+    width: 48,
+    marginBottom: 5,
+
   },
   text: {
     fontFamily: 'AlegreyaSansSC-Regular',
