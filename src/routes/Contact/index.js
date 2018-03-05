@@ -1,17 +1,17 @@
 import React from 'react'
-import { TextInput, Text, Image, KeyboardAvoidingView, View, ScrollView, StyleSheet, Linking, Alert, Dimensions } from 'react-native'
+import { KeyboardAvoidingView, ScrollView, StyleSheet, Linking, Alert } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 import { WebBrowser } from 'expo'
 import qs from 'qs'
+import { translate } from 'react-i18next'
 
-const { width } = Dimensions.get('window')
-
-export default class Contact extends React.Component {
-  static navigationOptions = { title: 'Contact Us' }
+class Contact extends React.Component {
+  static navigationOptions = ({ screenProps }) => ({
+    title: screenProps.t('feedback')
+  })
 
   state = {
     name: '',
-    email: '',
     message: '',
   }
 
@@ -29,8 +29,8 @@ export default class Contact extends React.Component {
     const { name, email, message } = this.state
     const url = 'mailto:' + encodeURIComponent('info@attentialluppolo.com')
     const data = {
-      subject: 'test-subject',
-      body: `Name: ${name}\n\nEmail: ${email}\n\nMessage:\n${message}`
+      subject: 'message sent from attentialluppolo mobile app',
+      body: `Name: ${name}\n\nMessage:\n${message}`
     }
 
     Linking.canOpenURL('mailto:').then(res => {
@@ -41,7 +41,6 @@ export default class Contact extends React.Component {
         Linking.openURL(`${url}?${query}`)
         this.setState({
           name: '',
-          email: '',
           message: '',
         })
       }
@@ -50,6 +49,7 @@ export default class Contact extends React.Component {
   }
 
   render() {
+    const { t } = this.props
     return (
       <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={80} style={[{flex: 1}, styles.bgColor]}>
         <ScrollView
@@ -57,55 +57,41 @@ export default class Contact extends React.Component {
           removeClippedSubviews={false}
           keyboardShouldPersistTaps={'always'}
         >
-          {/* <View style={styles.container}> */}
-            {/* <Text style={styles.title}>Contact Us</Text> */}
+          <FormLabel>{t('name')}</FormLabel>
+          <FormInput
+            value={this.state.name}
+            onChangeText={(text) => this.updateFormInput('name', text)}
+            underlineColorAndroid='#D0CCD0'
+            ref={ input => { this.inputs['one'] = input } }
+            onSubmitEditing={ () => { this.focusNextField('two') } }
+            blurOnSubmit={ false }
+            returnKeyType={ 'next' }
+          />
 
-            <FormLabel>Name</FormLabel>
-            <FormInput
-              value={this.state.name}
-              onChangeText={(text) => this.updateFormInput('name', text)}
-              underlineColorAndroid='#D0CCD0'
-              ref={ input => { this.inputs['one'] = input } }
-              onSubmitEditing={ () => { this.focusNextField('two') } }
-              blurOnSubmit={ false }
-              returnKeyType={ "next" }
-            />
+          <FormLabel>{t('message')}</FormLabel>
+          <FormInput
+            value={this.state.message}
+            onChangeText={(text) => this.updateFormInput('message', text)}
+            underlineColorAndroid='#D0CCD0'
+            ref={ input => { this.inputs['two'] = input } }
+            returnKeyType={ 'done' }
+          />
 
-            <FormLabel>Email</FormLabel>
-            <FormInput
-              value={this.state.email}
-              onChangeText={(text) => this.updateFormInput('email', text)}
-              underlineColorAndroid='#D0CCD0'
-              ref={ input => { this.inputs['two'] = input } }
-              onSubmitEditing={ () => { this.focusNextField('three') } }
-              blurOnSubmit={ false }
-              returnKeyType={ "next" }
-              keyboardType={'email-address'}
-            />
-
-            <FormLabel>Message</FormLabel>
-            <FormInput
-              value={this.state.message}
-              onChangeText={(text) => this.updateFormInput('message', text)}
-              underlineColorAndroid='#D0CCD0'
-              ref={ input => { this.inputs['three'] = input } }
-              returnKeyType={ "done" }
-            />
-
-            <Button
-              onPress={this.sendMessage}
-              title="SUBMIT"
-              color={'#272727'}
-              large
-              backgroundColor="#FFD700"
-              buttonStyle={styles.button}
-            />
-          {/* </View> */}
+          <Button
+            onPress={this.sendMessage}
+            title={t('submit')}
+            color={'#272727'}
+            large
+            backgroundColor='#FFD700'
+            buttonStyle={styles.button}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
     )
   }
 }
+
+export default translate('contact')(Contact)
 
 const styles = StyleSheet.create({
   bgColor: { backgroundColor: '#272727' },
@@ -118,15 +104,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     color: '#FBFCFF',
     fontFamily: 'AlegreyaSansSC-Light',
-  },
-  logoContainer: {
-    maxHeight: 70,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    width: 170,
-    maxHeight: 40
   },
   button: {
     marginTop: 40,

@@ -7,13 +7,9 @@ import Baguette from './routes/Baguette'
 import Fries from './routes/Fries'
 
 import { StackNavigator } from 'react-navigation'
-import Header from './Header'
 
 const routeConfig = {
-  menu: {
-    screen: Menu,
-    navigationOptions: { title: 'Menu' }
-  },
+  menu: { screen: Menu },
   hamburger: { screen: Burgers },
   salsiccia: { screen: Salsiccia },
   wurstel: { screen: Wurstel },
@@ -22,6 +18,7 @@ const routeConfig = {
 }
 
 const StackNavigatorConfig = {
+  mode: 'modal',
   headerMode: 'none',
   initialRouteName: 'menu',
   cardStyle: { opacity: 1 }

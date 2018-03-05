@@ -2,13 +2,19 @@ import React from 'react'
 import { View, Platform, Linking, StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native'
 import { MapView, WebBrowser } from 'expo'
 import { Button } from 'react-native-elements'
+import { translate } from 'react-i18next'
 
 import mapStyle from  './mapStyle'
 
 const { width, height } = Dimensions.get('window')
 
-export default class Address extends React.Component {
+class Address extends React.Component {
+  static navigationOptions = ({ screenProps }) => ({
+    title: screenProps.t('address')
+  })
+
   render() {
+    const { t } = this.props
     return (
       <View style={styles.container}>
         <MapView
@@ -27,17 +33,17 @@ export default class Address extends React.Component {
               coordinate={{latitude: 40.21081, longitude: 16.676378}}
               title='Attenti al Luppolo'
               description='via Giustino Fortunato 69, Policoro (Mt)'
-              pinColor='gold'
+              pinColor='#A1C341'
             />
           </MapView>
           <View style={styles.buttonContainer}>
             <Button
               raised
-              icon={{name: 'ios-locate-outline', type: 'ionicon', color:'gold'}}
-              title='Navigate'
-              color='gold'
-              backgroundColor='rgba(60,60,60,0.6)'
-              containerViewStyle={[styles.radius, {backgroundColor: 'transparent'}]}
+              icon={{name: 'ios-locate-outline', type: 'ionicon', color:'#272727'}}
+              title={t('navigate')}
+              color='#272727'
+              backgroundColor='#FFD700'
+              textStyle={{fontFamily: 'AlegreyaSansSC-Regular', fontSize: 15}}
               borderRadius={styles.radius}
               onPress={
                 Platform.select({
@@ -46,17 +52,6 @@ export default class Address extends React.Component {
                 })
               }
             />
-            <TouchableOpacity
-              onPress={
-                Platform.select({
-                  ios: () => { WebBrowser.openBrowserAsync('https://goo.gl/maps/uVTyfJzC8662') },
-                  android: () => { WebBrowser.openBrowserAsync('https://goo.gl/maps/uVTyfJzC8662') }
-                })
-              }
-              style={[styles.bubble, styles.button]}
-            >
-              <Text style={styles.buttonText}>Click</Text>
-            </TouchableOpacity>
           </View>
           {/* <Button
             title='Muuuuu'
@@ -72,18 +67,16 @@ export default class Address extends React.Component {
   }
 }
 
-Address.navigationOptions = {
-  title: 'Address'
-}
+export default translate('address')(Address)
 
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject
   },
   buttonContainer: {
     flexDirection: 'row',

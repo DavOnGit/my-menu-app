@@ -1,30 +1,24 @@
 import React from 'react'
 import { ScrollView, View, Text, StyleSheet } from 'react-native'
 import { Card } from 'react-native-elements'
+import { translate } from 'react-i18next'
 
-import MenuItem from '../../../components/MenuItem'
-
-export default class Baguette extends React.Component {
+class Baguette extends React.Component {
   static navigationOptions = {
     title: 'Baguettes'
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.screenProps &&
-      this.props.screenProps.main &&
-      !nextProps.screenProps) return false
-  }
-
-  render() {console.log(this.props)
+  render() {//console.log(this.props)
+    const { t, screenProps } = this.props
     return (
       <ScrollView style={styles.container}>
             <Card
-              title={'Componi con:'}
+              title={t('main')}
               titleStyle={{fontFamily: 'AlegreyaSansSC-Light', color: 'gold', fontWeight: 'normal', fontSize: 24, marginBottom: 5}}
               containerStyle={{backgroundColor: '#635255', borderRadius: 15, borderColor: '#635255'}}
               dividerStyle={{display: 'none'}}>
               {
-                this.props.screenProps && this.props.screenProps.main.map((item, idx) => (
+                screenProps.data && screenProps.data.main.map((item, idx) => (
                   <Text key={idx}
                     style={{ color: '#FFFFFF', textAlign: 'center', fontFamily: 'AlegreyaSansSC-Regular', fontSize: 14}}>
                     {item}
@@ -33,12 +27,12 @@ export default class Baguette extends React.Component {
               }
             </Card>
             <Card
-              title={'...e completa con:'}
+              title={t('addons')}
               titleStyle={{fontFamily: 'AlegreyaSansSC-Light', color: 'gold', fontWeight: 'normal', fontSize: 24, marginBottom: 5}}
               containerStyle={{backgroundColor: '#635255', borderRadius: 15, borderColor: '#635255'}}
               dividerStyle={{display: 'none'}}>
               {
-                this.props.screenProps && this.props.screenProps.addons.map((item, idx) => (
+                screenProps.data && screenProps.data.addons.map((item, idx) => (
                   <Text key={idx}
                     style={{ color: '#FFFFFF', textAlign: 'center', fontFamily: 'AlegreyaSansSC-Regular', fontSize: 14}}>
                     {item}
@@ -50,6 +44,8 @@ export default class Baguette extends React.Component {
     )
   }
 }
+
+export default translate('baguette')(Baguette)
 
 const styles = StyleSheet.create({
   container: {

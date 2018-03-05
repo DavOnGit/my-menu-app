@@ -1,17 +1,19 @@
 import React from 'react'
 import { ScrollView, Text, StyleSheet } from 'react-native'
 import { Card } from 'react-native-elements'
+import { translate } from 'react-i18next'
 
-export default class Fries extends React.Component {
+class Fries extends React.Component {
   static navigationOptions = {
     title: 'Fries'
   }
 
-  render() {console.log(this.props)
+  render() {//console.log(this.props)
+    const { t, screenProps } = this.props
     return (
       <ScrollView style={styles.container}>
         {
-          this.props.screenProps && this.props.screenProps.map((item, idx) => (
+          screenProps.data && screenProps.data.map((item, idx) => (
             <Card
               title={item}
               titleStyle={{fontFamily: 'AlegreyaSansSC-Light', color: 'gold', fontWeight: 'normal', fontSize: 24, marginBottom: 0}}
@@ -22,12 +24,14 @@ export default class Fries extends React.Component {
           ))
         }
         <Text style={{ color: '#D0CCD0', marginVertical: 20, textAlign: 'center' }}>
-          * prodotto surgelato all'origine.
+          {t('deepfrozen')}
         </Text>
       </ScrollView>
     )
   }
 }
+
+export default translate('fries')(Fries)
 
 const styles = StyleSheet.create({
   container: {

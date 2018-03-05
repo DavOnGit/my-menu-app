@@ -1,18 +1,21 @@
 {
   "expo": {
-    "name": "Menu-app",
-    "description": "No description",
-    "slug": "menu-app-r1WD9snNM",
+    "name": "Attenti al luppolo",
+    "description": "Craft beer & eatigs, in Policoro!",
+    "slug": "attentialluppolo",
     "privacy": "unlisted",
     "sdkVersion": "23.0.0",
     "version": "0.1.1",
     "orientation": "default",
-    "primaryColor": "#209020",
-    "icon": "https://d1wp6m56sqw74a.cloudfront.net/~assets/c9aa1be8a6a6fe81e20c3ac4106a2ebc",
-    "splash": {
-      "image": "./assets/images/splashwolf.png",
-      "tabletImage": "./assets/images/splashwolf.png",
-      "backgroundColor": "#272727"
+    "primaryColor": "#272727",
+    "androidStatusBar": {
+      "backgroundColor": "#474747"
+    },
+    "icon": "./assets/images/testa_colored_bg.png",
+    "loading": {
+      "icon": "./assets/images/solo_lupo.png",
+      "backgroundColor": "#FFB800",
+      "hideExponentText": true
     },
     "packagerOpts": {
       "assetExts": [
@@ -23,7 +26,16 @@
       ]
     },
     "ios": {
+      "bundleIdentifier": "com.attentialluppolo.ios-app",
       "supportsTablet": false
+    },
+    "android": {
+      "package": "com.attentialluppolo.attentialluppolo",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDQ_d2B7Zw2Xd5PQejXBzaRtg3R3D9uoRw"
+        }
+      }
     }
   }
 }

@@ -1,13 +1,12 @@
 import React from 'react'
 import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import { ListItem, Button } from 'react-native-elements'
-
-// import Header from '../Header'
-
 import "@expo/vector-icons"
 
-export default class Menu extends React.Component {
-  //static navigationOptions = { title: 'Salsiccias' }
+class Menu extends React.Component {
+  static navigationOptions = ({ screenProps }) => ({
+    title: screenProps.t('food')
+  })
 
   render() {
     const { navigation: { navigate } } = this.props
@@ -55,6 +54,8 @@ export default class Menu extends React.Component {
     )
   }
 }
+
+export default Menu
 
 const styles = StyleSheet.create({
   scroll: {

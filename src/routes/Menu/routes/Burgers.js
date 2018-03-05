@@ -8,14 +8,14 @@ export default class Burgers extends React.Component {
   }
 
   render() {console.log(this.props)
+    const { screenProps } = this.props
     return (
       <ScrollView style={styles.container}>
         {
-          this.props.screenProps && this.props.screenProps.map((burger, idx) => (
+          screenProps.data && screenProps.data.map((burger, idx) => (
             <Card
               title={burger.name}
               titleStyle={{fontFamily: 'AlegreyaSansSC-Light', color: 'gold', fontWeight: 'normal', fontSize: 24, marginBottom: 5}}
-              //fontFamily={'AlegreyaSansSC-Medium'}
               containerStyle={{backgroundColor: '#635255', borderRadius: 15, borderColor: '#635255'}}
               dividerStyle={{display: 'none'}}
               key={idx}>

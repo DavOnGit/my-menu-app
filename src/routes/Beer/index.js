@@ -7,9 +7,9 @@ import { WebBrowser } from 'expo'
 import firebase from '../../firebase'
 
 class TapList extends React.Component {
-  static navigationOptions = {
-    title: 'TapList'
-  }
+  static navigationOptions = ({ screenProps }) => ({
+    title: screenProps.t('beer')
+  })
 
   state = {
     tapList: []
@@ -17,14 +17,11 @@ class TapList extends React.Component {
 
   async componentWillMount() {
     const tapList = await firebase.database().ref().child('ontap/').once('value')
-    //const tapListString = await AsyncStorage.getItem('ontap')
-    //const tapList = JSON.parse(tapListString)
-    //console.log(tapList)
     this.setState({ tapList: tapList.val() })
   }
 
   render() {
-    const { tapList } = this.state; console.log(!tapList.length)
+    const { tapList } = this.state
     return (!tapList.length ?
       <View style={{flex: 1, backgroundColor: '#272727'}}>
         <Spinner
@@ -32,7 +29,6 @@ class TapList extends React.Component {
           color={'#489'}
           textContent={"Loading..."}
           textStyle={{color: '#FFF'}}
-          //overlayColor={'#272727'}
         />
       </View> :
       <ScrollView
@@ -104,48 +100,3 @@ const styles = StyleSheet.create({
   rightContainer: { alignItems: 'center' },
   rightTitle: { textAlign: 'center' },
 })
-
-const tapList = [
-  {
-    brewer: 'Port Brewing/Lost Abbey',
-    name: 'High Tide',
-    style: 'seasonal IPA',
-    alc: 6.5,
-    ratebeer: 'https://www.ratebeer.com/beer/port-brewing-high-tide-fresh-hop-ipa/39965/#container'
-  },
-  {
-    brewer: 'Dupont',
-    name: 'Saison Bio',
-    style: 'Saison',
-    alc: 5.5,
-    ratebeer: 'https://www.rtjhn7y6hjhf'
-  },
-  {
-    brewer: 'BrewDog',
-    name: 'Dead Pony Club',
-    style: 'PaleAle',
-    alc: 3.6,
-    ratebeer: 'ebyyeh655'
-  },
-  {
-    brewer: 'Lariano',
-    name: 'Statale 52',
-    style: 'APA',
-    alc: 6,
-    ratebeer: 'gb56y6yhhi'
-  },
-  {
-    brewer: 'Reinaert',
-    name: 'Grand Cru',
-    style: 'Tripel',
-    alc: 9,
-    //ratebeer: 'e5h656h5yht'
-  },
-  {
-    brewer: 'Lariano',
-    name: 'La Grigna',
-    style: 'Pils',
-    alc: 4.6,
-    ratebeer: 'b55y6rtybd'
-  },
-]

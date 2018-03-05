@@ -18,7 +18,7 @@ async function checkConnection() {
 }
 
 async function syncStore() {console.log('***** sync started ******')
-const isConnected = await checkConnection()
+  const isConnected = await checkConnection()
   if (!isConnected) {
     setTimeout(syncStore, 10000)
     return null
@@ -97,7 +97,7 @@ export default class App extends React.Component {
         {!this.state.assetsLoaded ?
           LoadingView : (
           <View style={styles.container}>
-            <StatusBar />
+            <StatusBar translucent backgroundColor="#474747"/>
             <Root />
           </View>
         )}
@@ -115,6 +115,6 @@ const styles = StyleSheet.create({
     flex: 1,
     //justifyContent: 'center',
     // NOTE: for ios add this: react-native-status-bar-size
-    //marginTop: (Platform.OS == 'ios') ? 20 : StatusBar.currentHeight
+    //paddingTop: (Platform.OS == 'ios') ? 0 : StatusBar.currentHeight || (Platform.Version < 23 ? 25 : 24)
   },
 })

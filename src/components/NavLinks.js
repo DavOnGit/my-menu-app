@@ -3,10 +3,13 @@ import { View, TouchableOpacity, Text, Image, StyleSheet, Linking, Platform } fr
 import { Icon } from 'react-native-elements'
 import { WebBrowser } from 'expo'
 import AppLink from 'react-native-app-link'
+import { translate } from 'react-i18next'
 
-export default class NavLinks extends React.Component {
+class NavLinks extends React.Component {
 
-  render() {
+  render() {//console.log('FkU2!', this.props)
+    const { t } = this.props
+
     return (
       <View style={styles.mainContainer}>
         <View style={styles.row}>
@@ -20,7 +23,7 @@ export default class NavLinks extends React.Component {
               size={48}
               iconStyle={styles.icon}
             />
-            <Text style={styles.text}>Beer</Text>
+            <Text style={styles.text}>{t('beer')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => { this.props.navigate('Menu') }}
@@ -33,7 +36,7 @@ export default class NavLinks extends React.Component {
               iconStyle={styles.icon}
             /> */}
             <Image source={require('../../assets/images/foodicon.png')} style={styles.imageIcon} />
-            <Text style={styles.text}>Food</Text>
+            <Text style={styles.text}>{t('food')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -55,7 +58,7 @@ export default class NavLinks extends React.Component {
               iconStyle={styles.icon}
             /> */}
             <Image source={require('../../assets/images/bookingicon.png')} style={styles.imageIcon} />
-            <Text style={styles.text}>Events</Text>
+            <Text style={styles.text}>{t('events')}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.row}>
@@ -82,7 +85,7 @@ export default class NavLinks extends React.Component {
               source={require('../../assets/images/newsicon.png')}
               style={styles.imageIcon}
             />
-            <Text style={styles.text}>News</Text>
+            <Text style={styles.text}>{t('news')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => { this.props.navigate('Contact') }}
@@ -94,7 +97,7 @@ export default class NavLinks extends React.Component {
               size={48}
               iconStyle={styles.icon}
             />
-            <Text style={styles.text}>Feedback</Text>
+            <Text style={styles.text}>{t('feedback')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => { this.props.navigate('Address') }}
@@ -110,13 +113,15 @@ export default class NavLinks extends React.Component {
               source={require('../../assets/images/addressicon.png')}
               style={styles.imageIcon}
             />
-            <Text style={styles.text}>Address</Text>
+            <Text style={styles.text}>{t('address')}</Text>
           </TouchableOpacity>
         </View>
       </View>
     )
   }
 }
+
+export default translate('common', { wait: true })(NavLinks)
 
 const styles = StyleSheet.create({
   mainContainer: {
