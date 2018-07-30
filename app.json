@@ -2,16 +2,16 @@
   "expo": {
     "name": "Attenti al luppolo",
     "description": "Craft beer & eatigs, in Policoro!",
-    "slug": "attentialluppolo",
+    "slug": "aal-mobile-app",
     "privacy": "unlisted",
     "sdkVersion": "23.0.0",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "orientation": "default",
     "primaryColor": "#272727",
     "androidStatusBar": {
       "backgroundColor": "#474747"
     },
-    "icon": "./assets/images/testa_colored_bg.png",
+    "icon": "./assets/images/aal-icon_1024.png",
     "loading": {
       "icon": "./assets/images/solo_lupo.png",
       "backgroundColor": "#FFB800",
@@ -33,7 +33,7 @@
       "package": "com.attentialluppolo.attentialluppolo",
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyDQ_d2B7Zw2Xd5PQejXBzaRtg3R3D9uoRw"
+          "apiKey": "AIzaSyCrLIwuJhuJ0f9610o45YDdghG-ERWOZus"
         }
       }
     }

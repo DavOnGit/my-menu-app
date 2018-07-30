@@ -42,6 +42,8 @@ const StackConfig = {
 const styles = {
   header: {
     backgroundColor: 'transparent',
+    //borderBottomColor: '#000',
+    //borderBottomWidth: 2,
     //height: 54,
     //justifyContent: 'center',
     //alignSelf: 'center',

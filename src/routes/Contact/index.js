@@ -21,12 +21,12 @@ class Contact extends React.Component {
     this.inputs[id].focus();
   }
 
-  updateFormInput= (type, value) => {
+  updateFormInput = (type, value) => {
     this.setState({ [type]: value })
   }
 
   sendMessage = () => {
-    const { name, email, message } = this.state
+    const { name, message } = this.state
     const url = 'mailto:' + encodeURIComponent('info@attentialluppolo.com')
     const data = {
       subject: 'message sent from attentialluppolo mobile app',
@@ -51,7 +51,7 @@ class Contact extends React.Component {
   render() {
     const { t } = this.props
     return (
-      <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={80} style={[{flex: 1}, styles.bgColor]}>
+      <KeyboardAvoidingView style={[{flex: 1}, styles.bgColor]} enabled>
         <ScrollView
           contentContainerStyle={styles.bgColor}
           removeClippedSubviews={false}
@@ -63,9 +63,10 @@ class Contact extends React.Component {
             onChangeText={(text) => this.updateFormInput('name', text)}
             underlineColorAndroid='#D0CCD0'
             ref={ input => { this.inputs['one'] = input } }
-            onSubmitEditing={ () => { this.focusNextField('two') } }
+            onSubmitEditing={() => { this.focusNextField('two') }}
             blurOnSubmit={ false }
             returnKeyType={ 'next' }
+            autoFocus={ true }
           />
 
           <FormLabel>{t('message')}</FormLabel>
@@ -74,7 +75,8 @@ class Contact extends React.Component {
             onChangeText={(text) => this.updateFormInput('message', text)}
             underlineColorAndroid='#D0CCD0'
             ref={ input => { this.inputs['two'] = input } }
-            returnKeyType={ 'done' }
+            onSubmitEditing={this.sendMessage}
+            returnKeyType={ 'send' }
           />
 
           <Button

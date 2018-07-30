@@ -89,7 +89,8 @@ export default class App extends React.Component {
       <AppLoading
         startAsync={this._loadAssetsAsync}
         onFinish={() => this.setState({ assetsLoaded: true })}
-        onError={console.warn} />
+        onError={console.warn}
+      />
     )
 
     return (

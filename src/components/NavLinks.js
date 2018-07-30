@@ -156,12 +156,12 @@ const styles = StyleSheet.create({
     //alignSelf: 'center',
     width: 82,
     height: 82,
-    backgroundColor: '#000',
+    backgroundColor: '#171717',
     borderRadius: 5,
     //margin: 10,
     marginBottom: 0,
-    // borderWidth: 1,
-    // borderColor: '#444'
+    borderWidth: 1,
+    borderColor: '#444'
   },
   icon: {
     color: 'rgb(240, 212, 98)',
